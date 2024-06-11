@@ -86,7 +86,7 @@ class SolarHydrogenVentilator:
 
         """Get indoor air quality data from the environment and external APIs."""
         # Fetch temperature, humidity, and CO2 level data from OpenWeatherMap API
-        api_key = "92fa91de6a08cf8f46ec66d254bb268c"
+        api_key = ""
         location = "Mombasa"
         url = f"http://api.openweathermap.org/data/2.5/weather?q={location}&appid={api_key}&units=metric"
 
