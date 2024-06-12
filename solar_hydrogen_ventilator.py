@@ -56,7 +56,9 @@ class SolarHydrogenVentilator:
         electrolyzer_power = 100 + (10 * self.system_size)
         if self.battery_charge >= electrolyzer_power:
             max_hydrogen_produced = self.battery_charge * electrolysis_efficiency
+            print(f"Hydrogen produced from water electrolysis: {max_hydrogen_produced} cubic meters")
             self.hydrogen_storage = min(float(self.battery_capacity), self.hydrogen_storage + max_hydrogen_produced)
+            print(f"Hydrogen stored: {self.hydrogen_storage} cubic meters")
             self.battery_charge -= electrolyzer_power
 
     def compress_hydrogen(self):
@@ -65,6 +67,7 @@ class SolarHydrogenVentilator:
         compressor_efficiency = 0.8 - (0.002 * (temperature - 25)) - (0.005 * (self.pressure_ratio - 1))
         if self.hydrogen_storage > 0:
             max_compressed_hydrogen = self.hydrogen_storage * compressor_efficiency
+            print(f"Hydrogen compressed: {max_compressed_hydrogen} cubic meters")
             self.hydrogen_storage -= max_compressed_hydrogen
 
     def control_ventilation(self):
@@ -112,7 +115,7 @@ class SolarHydrogenVentilator:
                 self.control_ventilation()
                 self.simulate_ventilation()
                 self.simulate_indoor_air_quality()
-                print(f"battery: {self.battery_charge}")
+                print(f"Battery: {self.battery_charge}")
                 print(f"Indoor Air Quality: {self.indoor_air_quality}")
                 time.sleep(1)  # Simulation time step (1 second)
         except KeyboardInterrupt:
